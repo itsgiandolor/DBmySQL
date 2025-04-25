@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 export const db = await mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin",
+    password: "astraeiaaaa",
     database: "clinic_db",
 });
 
@@ -25,14 +25,14 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 // app.set("views", "./views")
 
-//Index
+//Index / All Patients Page
 app.get('/', (req, res) => {
     res.redirect('/patient');
 });
   
-  //About page
-app.get('/about', (req, res) => {
-    res.render('about', {title: 'About'})
+  //Add patient page
+app.get('/add_patient', (req, res) => {
+    res.render('add', {title: 'Add Patient'})
 });
   
   //Blog Routes
