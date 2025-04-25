@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import mysql from "mysql2/promise";
 import {router} from "./routes/patientroutes.js";
+import { postPatient } from "./controllers/patientController.js";
 import { appointmentRouter } from "./routes/appointmentroutes.js";
 
 
@@ -33,12 +34,24 @@ app.get('/', (req, res) => {
 });
   
   //Add patient page
-app.get('/add_patient', (req, res) => {
+app.get('/patient/add', (req, res) => {
     res.render('add', {title: 'Add Patient'})
 });
 
+app.post("/patient/add", async (req, res) => {
+  const { id, firstName, middleName, lastName, contact } = req.body;
+
+  try {
+      await postPatient(id, firstName, middleName, lastName, contact);
+      res.redirect("/");
+  } catch (err) {
+      console.error("Failed to add patient:", err);
+      res.status(500).send("Error adding patient.");
+  }
+});
+
 // Add schedule page
-app.get('/schedule', (req, res) => {
+app.get('/schedule/appointment', (req, res) => {
   res.render('schedule', {title: 'Schedule Appointment'})
 });
   

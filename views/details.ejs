@@ -5,18 +5,19 @@
     
     <%- include("./partials/nav.ejs") %>
 
-    <div class = "detailsContent">
+    <div class="detailsContent">
         <h2><%= title %></h2>
 
-            <div class = "blogs">
-                <p class="body"><%= patient.id %></p>
-                <p class="body"><%= patient.first_name %></p>
-                <p class="body"><%= patient.middle_name %></p>
-                <p class="body"><%= patient.last_name %></p>
-                <p class="body"><%= patient.contact_no %></p>
-            </div>
-            <a href="/patient/edit/<%= patient.id %>" class ="edit">edit</a>
-            <a class="delete" data-doc="<%= patient.id %>">delete</a>
+        <div class="blogs">
+            <p class="body"><strong>Patient ID:</strong> <%= patient.id %></p>
+            <p class="body"><strong>First Name:</strong> <%= patient.first_name %></p>
+            <p class="body"><strong>Middle Name:</strong> <%= patient.middle_name %></p>
+            <p class="body"><strong>Last Name:</strong> <%= patient.last_name %></p>
+            <p class="body"><strong>Contact Info:</strong> <%= patient.contact_no %></p>
+        </div>
+
+        <a href="/patient/edit/<%= patient.id %>" class="edit">Edit</a>
+        <a class="delete" data-doc="<%= patient.id %>">Delete</a>
     </div>
 
     <%- include("./partials/footer.ejs") %>
@@ -32,8 +33,7 @@
             .then((response) => response.json())
             .then((data) => window.location.href = data.redirect)
             .catch((err) => console.log(err));
-        })
-
+        });
     </script>
 </body>
 </html>
