@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="appointments-list">
+        <h2>All Appointments</h2>
+        
+        <!-- Check if appointments are available -->
+        <% if (!appointments || appointments.length === 0) { %>
+            <p>No appointments available.</p>
+        <% } else { %>
+            <!-- Loop through appointments and display a preview -->
+            <% appointments.forEach(appointment => { %>
+                <div class="appointment-preview">
+                    <h3><a href="/appointments/<%= appointment.id %>"><%= appointment.first_name %> <%= appointment.last_name %> - Appointment</a></h3>
+                    <p><strong>Concern:</strong> <%= appointment.concern %></p>
+                    <p><strong>Date:</strong> <%= new Date(appointment.appointment_date).toLocaleDateString() %></p>
+                </div>
+            <% }); %>
+        <% } %>
+
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+
+</body>
+</html>

@@ -3,9 +3,18 @@ export const appointmentRouter = express.Router();
 
 import {
     renderScheduleForm,
-    submitAppointment
+    submitAppointment,
+    getAppointments,
+    getAppointmentDetails,
+    deleteAppointment
 } from "../controllers/appointmentController.js";
 
-appointmentRouter.get("/schedule_appointment", renderScheduleForm);
+appointmentRouter.get("/schedule", renderScheduleForm);
 
 appointmentRouter.post("/schedule", submitAppointment);
+
+appointmentRouter.get('/', getAppointments);
+
+appointmentRouter.get('/:id', getAppointmentDetails);
+
+appointmentRouter.delete('/delete/:id', deleteAppointment);

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    
+    <%- include("./partials/nav.ejs") %>
+
+    <div class="appointmentDetailsContent">
+        <h2><%= appointment.first_name %> <%= appointment.last_name %> - Appointment Details</h2>
+
+        <div class="appointmentDetails">
+            <p><strong>Patient ID:</strong> <%= appointment.id %></p>
+            <p><strong>First Name:</strong> <%= appointment.first_name %></p>
+            <p><strong>Last Name:</strong> <%= appointment.last_name %></p>
+            <p><strong>Contact Info:</strong> <%= appointment.contact_no %></p>
+            <p><strong>Concern:</strong> <%= appointment.concern %></p>
+            <p><strong>Appointment Date:</strong> <%= new Date(appointment.appointment_date).toLocaleString() %></p>
+        </div>
+
+        <a href="/appointments/edit/<%= appointment.id %>" class="edit">Edit</a>
+        <a class="delete" data-doc="<%= appointment.id %>">Delete</a>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+
+    <script>
+        const deleteDoc = document.querySelector('a.delete');
+
+        deleteDoc.addEventListener('click', (e) => {
+            const endpoint = `/appointments/delete/${deleteDoc.dataset.doc}`;
+            
+            fetch(endpoint, {
+                method: 'DELETE'
+            })
+            .then((response) => response.json())
+            .then((data) => window.location.href = data.redirect)
+            .catch((err) => console.log(err));
+        });
+    </script>
+</body>
+</html>

@@ -50,7 +50,7 @@ export async function getPatientDetails(req, res){
     try {
         const patient = await getPatientbyID(req.params.id);
         if (patient) {
-            return res.render(`../views/details`, {title: "Patient Info", patient});
+            return res.render(`../views/patientDetails`, {title: "Patient Info", patient});
         }
     } catch (err) {
         console.error(err);
