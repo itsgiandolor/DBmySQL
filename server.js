@@ -2,6 +2,8 @@ import express from "express";
 import morgan from "morgan";
 import mysql from "mysql2/promise";
 import {router} from "./routes/patientroutes.js";
+import { appointmentRouter } from "./routes/appointmentroutes.js";
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -34,9 +36,16 @@ app.get('/', (req, res) => {
 app.get('/add_patient', (req, res) => {
     res.render('add', {title: 'Add Patient'})
 });
+
+// Add schedule page
+app.get('/schedule', (req, res) => {
+  res.render('schedule', {title: 'Schedule Appointment'})
+});
   
   //Blog Routes
 app.use('/patient', router);
+
+app.use("/schedule", appointmentRouter);
   
   // 404 page
 app.use((req, res) => {

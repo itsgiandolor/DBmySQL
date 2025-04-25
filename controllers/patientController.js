@@ -34,3 +34,4 @@ export const updatePatient = async (res) => {
         [res.first_name, res.middle_name, res.last_name, res.contact_no, res.id]
     );
 }
+
